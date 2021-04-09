@@ -12,9 +12,8 @@ import SearchField from '../components/searchField'
 export default function Home() {
 
   const [zip, setZip] = useState('94954')
-  const [weather, setWeather] = useState({})
   const [locName, setLocName] = useState('')
-
+  const [rawJSON, setRawJSON] = useState({weather: ['']})
 
   useEffect(() => {
       const fetchData = async () => {
@@ -22,8 +21,8 @@ export default function Home() {
           const result = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${config.apiKey}`)
           const data = await result.json()
 
+          setRawJSON(data)
           setLocName(data.name)
-          setWeather(data.main)
         } catch(e) {
           console.log(e)
         }
@@ -43,21 +42,16 @@ export default function Home() {
       <Head>
         <title>Weather for {locName}</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.gstatic.com"/>
+        <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet"/> 
       </Head>
 
-      <SearchField></SearchField>
+      <h1>{locName}</h1>
 
-      <WeatherCard location={locName} weather={weather} />
+      <SearchField searchChange={e => handleZip(e.target.value)} />
+
+      <WeatherCard rawData={rawJSON} />
     
     </Container>
   )
 }
-
-/*
-<input
-        type='text'
-        defaultValue={zip}
-        placeholder='5-Digit Zip Code' 
-        onChange={e => handleZip(e.target.value)}
-        />
-*/

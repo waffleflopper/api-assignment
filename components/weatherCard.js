@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -13,10 +14,27 @@ const Container = styled.div`
     
 `
 
-export default function WeatherCard({ location, weather }) {
+
+
+const round = (k) => parseFloat(k).toFixed(0)
+
+export default function WeatherCard({ rawData }) {
+    const [convForm, setConvForm] = useState(k => k => round(((k-273.15)*1.8)+32))
+    const [scale, setScale] = useState("f")
+    
+    if (rawData.main === undefined) return (<Container>LOADING</Container>)
+
+    let weatherDescription = rawData.weather[0].main
+    const { temp_min, temp_max, temp, feels_like, humidity } = rawData.main
+
     return (
         <Container>
-            {location}
+            <h2>{convForm(temp)}°{scale}</h2>
+            <h3>Feels Like: {convForm(feels_like)}°</h3>
+            <p>High: {convForm(temp_max)}°</p>
+            <p>Low: {convForm(temp_min)}°</p>
+            <p>&nbsp;</p>
+            <p>{weatherDescription}</p>
         </Container>
     )
 }

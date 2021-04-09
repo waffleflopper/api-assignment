@@ -16,6 +16,7 @@ export default function SearchField(props) {
     return (
         <Text 
             placeholder="Search Zip"
+            onChange={props.searchChange}
         />
     )
 }
