@@ -1,14 +1,19 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import styles from '../styles/Home.module.css'
 import { config } from './api/config'
+
+
+import { GlobalStyle } from '../styles/global.css'
+
+import { Container } from '../containers/container'
+import WeatherCard from '../components/weatherCard';
+import SearchField from '../components/searchField'
 
 export default function Home() {
 
   const [zip, setZip] = useState('94954')
   const [weather, setWeather] = useState({})
   const [locName, setLocName] = useState('')
-  const [newZip, setNewZip] = useState('')
 
 
   useEffect(() => {
@@ -33,20 +38,26 @@ export default function Home() {
   }
 
   return (
-    <div className={styles.container}>
+    <Container>
+    <GlobalStyle/>
       <Head>
         <title>Weather for {locName}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <input
+      <SearchField></SearchField>
+
+      <WeatherCard location={locName} weather={weather} />
+    
+    </Container>
+  )
+}
+
+/*
+<input
         type='text'
         defaultValue={zip}
         placeholder='5-Digit Zip Code' 
         onChange={e => handleZip(e.target.value)}
         />
-      
-       {locName}
-    </div>
-  )
-}
+*/
