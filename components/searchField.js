@@ -10,6 +10,8 @@ const Text = styled.input`
     outline: none !important;
     padding: 5px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+    margin: 1rem;
+    font-size: 25px;
 `
 
 export default function SearchField(props) {

@@ -13,18 +13,46 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0rem;
     }
 
-    h2 {
-      font-size: 60px;
-      text-align: center;
-      margin: 0rem;
+  .temps{
+    min-width: 380px;
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
     }
-    h3 {
-      text-align: center;
-      font-size: 40px;
-    }
-    p {
-      text-align: center;
-      font-size: 25px;
-    }
+
+  .humidity {
+    min-width: 380px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 20px;
+    justify-self: flex-end;    
+  }
+  .lighten {
+    color: rgba(0, 0, 0, 0.7);
+    margin: 0 2px 0 2px;
+  }
+
+  .currentTemp {
+    font-size: 200px;
+    min-width: 100px;
+    padding: 0px;
+    margin: 0.5rem;
+  }
+
+  .hilow {
+    align-self: center;
+    font-size: 50px;
+    color: rgba(0, 0, 0, 0.8)
+  }
+  .description {
+    align-self: center;
+    font-size: 80px;
+    color: rgba(0,0,0,0.8)
+  }
     
 `;
